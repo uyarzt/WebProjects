@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebAppForTesting.Models.TestingModels.Answer>
+
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <hr />
+    <div class="badge bg-primary my-3 pl-2">
+        <h2>@ViewBag.Message</h2>
+    </div>
+    <br /><br />
+
+    @using (Html.BeginForm("Testing", "Home", new { quesId = (int)ViewBag.Num }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="p-3 descript">
+            <div class="lead">
+                <h4>@ViewBag.Name</h4>
+            </div>
+            <div class="form-check">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="custom-radio">
+                            @Html.RadioButton("ans", item.Ans, new { @class = "form-check-input" })
+                            <span class="form-check-label">@item.Ans</span> <br />
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="form-group mt-4">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Next Ques" class="btn btn-info" />
+                </div>
+            </div>
+        </div>       
+
+    }
+</div>
+
+

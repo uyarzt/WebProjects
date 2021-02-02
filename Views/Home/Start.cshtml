@@ -1,0 +1,46 @@
+﻿@model WebAppForTesting.Models.TestingModels.TestType
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+<div>
+    <hr />
+    <div class="col-12 position-relative d-flex justify-content-center align-items-center my-2 descript">
+        <div class="col-4">
+            <h2 class="text-center text-uppercase font-weight-bold text-info">@Html.DisplayFor(model => model.TestName)</h2>
+        </div>
+        <div class="col-8">
+            <h4>Test @Html.DisplayNameFor(model => model.Description):</h4>
+            <p class="lead">@Html.DisplayFor(model => model.Description)</p>
+            <h4>Test @Html.DisplayNameFor(model => model.Level):</h4>
+            <p class="lead"> @Html.DisplayFor(model => model.Level)</p>
+        </div>
+    </div>
+    <hr />
+    <div class="col-12 mt-3">
+        @using (Html.BeginForm("Start", "Home", new { TestId = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBox("Ready", false)
+                        <span>I agree to start</span> <br />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Proceed" class="btn btn-info" />
+                </div>
+            </div>
+
+        }
+
+        <p class="mt-3 lead">
+            @Html.ActionLink("Back to Test List", "Index", new { @class = "text-dark" })
+        </p>
+
+    </div>
+</div>
+

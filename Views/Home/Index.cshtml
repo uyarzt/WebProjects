@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div class="d-flex justify-content-center jumbotron h-100 m-auto py-2">
+    <div class="row">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Action("GetTests", "Home")}
+        else
+        {
+            @Html.Partial("_IndexPartial")
+        }
+    </div>
+</div>
+
+
+
+
+

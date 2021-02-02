@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if (ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title</title>
+    }
+    else
+    {
+        <title>Site For Testing</title>
+    }
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Application For Testing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-white mr-3" })
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarText">
+                <ul class="navbar-nav flex-grow-1 text-uppercase">
+                    @*<li class="nav-item ml-3">
+                        @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link text-dark" })
+                    </li>
+                    <li class="nav-item ml-3">
+                        @Html.ActionLink("About", "About", "Home", new { @class = "nav-link text-dark" })
+                    </li>
+                    <li class="nav-item ml-3">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link text-dark" })
+                    </li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>   
+    <div class="container">
+        <main role="main" class="mt-lg-2">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer bg-info text-white fixed-bottom">
+        <div class="container">
+            <p class="m-2">&copy; @DateTime.Now.Year - ASP.NET Application</p>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="answer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="answer1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="correct" Type="Boolean" Nullable="false" />
+    <Property Name="questionId" Type="Int32" />
+    <NavigationProperty Name="question" Relationship="Self.FK_answer_question" FromRole="answer" ToRole="question" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="question1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="testId" Type="Int32" />
+    <NavigationProperty Name="answer" Relationship="Self.FK_answer_question" FromRole="question" ToRole="answer" />
+    <NavigationProperty Name="testType" Relationship="Self.FK_question_testType" FromRole="question" ToRole="testType" />
+  </EntityType>
+  <EntityType Name="testType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="testName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="level" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="question" Relationship="Self.FK_question_testType" FromRole="testType" ToRole="question" />
+  </EntityType>
+  <Association Name="FK_answer_question">
+    <End Role="question" Type="Self.question" Multiplicity="0..1" />
+    <End Role="answer" Type="Self.answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="answer">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_question_testType">
+    <End Role="testType" Type="Self.testType" Multiplicity="0..1" />
+    <End Role="question" Type="Self.question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="testType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="question">
+        <PropertyRef Name="testId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="answer" EntityType="Self.answer" />
+    <EntitySet Name="question" EntityType="Self.question" />
+    <EntitySet Name="testType" EntityType="Self.testType" />
+    <AssociationSet Name="FK_answer_question" Association="Self.FK_answer_question">
+      <End Role="question" EntitySet="question" />
+      <End Role="answer" EntitySet="answer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_question_testType" Association="Self.FK_question_testType">
+      <End Role="testType" EntitySet="testType" />
+      <End Role="question" EntitySet="question" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

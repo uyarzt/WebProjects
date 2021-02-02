@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="answer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="correct" Type="bit" Nullable="false" />
+    <Property Name="questionId" Type="int" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="question" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="testId" Type="int" />
+  </EntityType>
+  <EntityType Name="testType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="testName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="level" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_answer_question">
+    <End Role="question" Type="Self.question" Multiplicity="0..1" />
+    <End Role="answer" Type="Self.answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="answer">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_question_testType">
+    <End Role="testType" Type="Self.testType" Multiplicity="0..1" />
+    <End Role="question" Type="Self.question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="testType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="question">
+        <PropertyRef Name="testId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestingDBModelStoreContainer">
+    <EntitySet Name="answer" EntityType="Self.answer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="testType" EntityType="Self.testType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_answer_question" Association="Self.FK_answer_question">
+      <End Role="question" EntitySet="question" />
+      <End Role="answer" EntitySet="answer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_question_testType" Association="Self.FK_question_testType">
+      <End Role="testType" EntitySet="testType" />
+      <End Role="question" EntitySet="question" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

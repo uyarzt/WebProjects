@@ -1,0 +1,34 @@
+﻿@model WebAppForTesting.Models.TestingModels.Result
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <hr />
+    <div class="col-12 position-relative d-flex justify-content-center align-items-center my-2 descript">
+        <div class="col-4">
+            <h2 class="text-center text-uppercase font-weight-bold text-info">Test results<br /> @Session["TestName"]</h2>
+        </div>
+        <div class="col-8 p-3">
+            <h4>Answers correct:  @Model.RightAnswers</h4>
+            <h4>Total questions:  @Model.Replies</h4>
+            <br />
+            <h4>Percentage Correct:  @Model.PrintRusult() %</h4>
+        </div>
+    </div>
+    <hr />
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        <div class="col-12 mt-3">
+            <div class="form-group mt-4">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Back to Test List" class="btn btn-info" />
+                </div>
+            </div>            
+        </div>
+    }
+
+</div>
+

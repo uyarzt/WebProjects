@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestingDBModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="answer">
+      <EntityTypeMapping TypeName="TestingDBModel.answer">
+        <MappingFragment StoreEntitySet="answer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="answer1" ColumnName="answer" />
+          <ScalarProperty Name="correct" ColumnName="correct" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="question">
+      <EntityTypeMapping TypeName="TestingDBModel.question">
+        <MappingFragment StoreEntitySet="question">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="question1" ColumnName="question" />
+          <ScalarProperty Name="testId" ColumnName="testId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="testType">
+      <EntityTypeMapping TypeName="TestingDBModel.testType">
+        <MappingFragment StoreEntitySet="testType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="testName" ColumnName="testName" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="level" ColumnName="level" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

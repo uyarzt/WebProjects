@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebAppForTesting.Models.TestingModels.TestType>
+
+
+<h2 class="mt-2">@ViewBag.Title</h2>
+<hr />
+<table class="table my-2">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                <input type="button" class="btn btn-info m-0 mybtn mw-100" value="Start" onclick="location.href='@Url.Action("Start", "Home", new { id = item.Id })'" />
+            </td>
+        </tr>
+    }
+
+</table>
